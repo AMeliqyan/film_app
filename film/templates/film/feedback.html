@@ -1,0 +1,22 @@
+{% extends "film/layout/user.html" %}
+{% block title%}Decline{%endblock%}
+{% block content%}
+<form method="POST" novalidate>
+    {% csrf_token %}
+    {% for field in form %}
+    <div class="form-group">
+        <div class="text-danger">
+            {{ field.errors }}
+        </div>
+        {{ field.label_tag }}
+        {{ field }}
+
+    </div>
+    {% endfor %}
+
+
+    <button>Send</button>
+</form>
+    {{ feedback_da }}
+
+{%endblock%}

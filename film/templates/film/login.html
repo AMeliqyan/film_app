@@ -1,0 +1,23 @@
+{% extends "film/layout/user.html" %}
+{% block title%}Login{%endblock%}
+{% block content%}
+
+<h1>Login</h1>
+
+
+<form method="POST" novalidate>
+    {% csrf_token %}
+    {% for field in form %}
+    <div class="form-group">
+        <div class="text-danger">
+            {{ field.errors }}
+        </div>
+        {{ field.label_tag }}
+        {{ field }}
+
+    </div>
+    {% endfor %}
+    <button>Login</button>
+    <a href="{% url 'password_reset' %}"><i>Forgot Password?</i></a>
+</form>
+{%endblock%}

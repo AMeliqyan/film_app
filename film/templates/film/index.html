@@ -1,0 +1,56 @@
+{% extends 'film/layout/user.html' %}
+{% block content%}
+{% load filters %}
+
+<div class="card" style="width:500px">
+    <div class="card-body">
+        <img src="/media/{{ film.img }}" alt="" class="100 img-thumbnail">
+
+        <h4 class="card-title"></h4>
+        <p class="card-text">{{film.title}}</p>
+        Languages:
+        <ul>
+            {% for i in film.languages.all %}
+            <li>{{i.name}}</li>
+            {% endfor %}
+        </ul>
+
+        Genres:
+        <ul>
+            {% for i in film.genres.all %}
+            <li>{{i.name}}</li>
+            {% endfor %}
+        </ul>
+        Actors:
+        <ul>
+            {% for i in film.actors.all %}
+            <li>{{i.name}}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    <video controls>
+        <source src="/media/{{film.video}}">
+    </video>
+
+    <div>
+
+        <h3>Feedbacks</h3>
+        <ul class="list-group gap-3">
+            {% for f in film.feedbacks.all %}
+            <li class="list-group-item">
+                <span>{{ f.text }}</span> <br>
+                <span>
+               {{f.star|_range}}
+                </span> <br>
+                <b> {{ f.user }}</b> <br>
+                <i>{{ f.date }}</i>
+            </li>
+            {%endfor%}
+        </ul>
+
+    </div>
+
+</div>
+
+
+{% endblock %}

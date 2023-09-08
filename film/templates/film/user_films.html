@@ -1,0 +1,83 @@
+{% extends "film/layout/user.html" %}
+{% block title%} USERS {%endblock%}
+{% block content%}
+<table class="table table-bordered">
+    <thead>
+    <tr>
+        <th>Title</th>
+        <th>Languages</th>
+        <th>Genres</th>
+        <th>Actors</th>
+        <th>Date</th>
+        <th>Country</th>
+        <th>User</th>
+        <th>Image</th>
+        <th>Video</th>
+        <th>Active</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    {% for film in films %}
+    <tr>
+        <td>{{film.title}}</td>
+        <td>
+            <ul>
+                {% for i in film.languages.all %}
+                <li>{{i.name}}</li>
+                {% endfor %}
+            </ul>
+        </td>
+        <td>
+            <ul>
+                {% for i in film.genres.all %}
+                <li>{{i.name}}</li>
+                {% endfor %}
+            </ul>
+        </td>
+        <td>
+            <ul>
+                {% for i in film.actors.all %}
+                <li>{{i.name}}</li>
+                {% endfor %}
+            </ul>
+        </td>
+        <td> {{ film.date}}</td>
+        <td> {{ film.country.name}}</td>
+        <td> {{ film.user}}</td>
+        <td>
+            <img src="/media/{{ film.img }}" alt="" class="w-100 mg-thumbnail" style="height:150px; object-fit:contain">
+        </td>
+        <td>
+            <video controls width="100px" height="200px">
+                <source src="/media/{{film.video}}">
+            </video>
+        </td>
+        <td>{{ film.active }}</td>
+        <td>
+            {% if film.active %}
+            <div>
+                <a href="{% url 'del_film' id=film.id %}" class="btn btn-sm btn-danger"> Delete </a>
+                <a href="{% url 'update_film' id=film.id %}" class="btn btn-sm btn-warning"> Update </a>
+                <a href="{% url 'film_id' id=film.id %}" class="btn btn-sm btn-primary">See Details</a>
+            </div>
+            {% elif not film.notification.first %}
+            <div>
+                <a href="{% url 'accept_film' id=film.id %}" class="btn btn-sm btn-danger">Accept</a>
+                <a href="{% url 'decline_film' id=film.id %}" class="btn btn-sm btn-danger">Decline Film</a>
+
+            </div>
+            {% else %}
+            <div>{{film.notification.first.message}}</div>
+            {% endif %}
+
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+
+</table>
+
+
+{%endblock%}

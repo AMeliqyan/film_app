@@ -1,0 +1,33 @@
+{% extends "film/layout/user.html" %}
+{% block title%} USERS {%endblock%}
+{% block content%}
+<table class="table table-bordered">
+    <thead>
+    <tr>
+        <th>Firstname</th>
+        <th>Lastname</th>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Last Login</th>
+        <th>Is Active</th>
+        <th>Date Joined</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for user in users %}
+    <tr>
+        <td>{{user.first_name}}</td>
+        <td>{{ user.last_name }}</td>
+        <td>{{ user.username }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.last_login }}</td>
+        <td>{{ user.is_active }}</td>
+        <td>{{ user.date_joined }}</td>
+    </tr>
+    {% endfor %}
+
+    </tbody>
+</table>
+
+
+{%endblock%}

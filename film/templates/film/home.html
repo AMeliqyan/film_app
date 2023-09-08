@@ -1,0 +1,51 @@
+{% extends "film/layout/user.html" %}
+
+
+{% block title%}Home{%endblock%}
+{% block content%}
+<h1>Home</h1>
+<form action="" method="get">
+    <div class="btn-group">
+        <select name="language" class="btn btn-info">
+            {% for l in languages %}
+            <option value="{{l.id}}">{{ l.name }}</option>
+            {% endfor %}
+        </select>
+        <select name="genre" class="btn btn-info">
+            {% for g in genr %}
+            <option value="{{g.id}}">{{ g.name }}</option>
+            {% endfor %}
+        </select>
+        <select name="date" class="btn btn-info">
+            <option>2000</option>
+            <option>2001</option>
+            <option>2002</option>
+            <option>2003</option>
+        </select>
+        <button class="btn btn-success">Filter</button>
+
+    </div>
+
+</form>
+<div class="d-flex flex-wrap gap-3 align-items-start">
+    {% for i in film %}
+    <div class="card " style="width:300px; min-height:300px">
+        <div class="card-body d-flex flex-column justify-content-between">
+            <img src="/media/{{ i.img }}" alt="" class="w-100 img-thumbnail"
+                 style="height:200px;object-fit:cover; object-position:top">
+            <div>
+                <h4 class="card-title">{{i.title}}</h4>
+                <p class="card-text">{{i.date}}</p>
+            </div>
+
+            <div class="btn-group">
+                <a href="{% url 'film_id' id=i.id %}" class="btn btn-sm btn-primary">See Details</a>
+                <a class="btn btn-sm btn-primary" href="{% url 'feedback' id=i.id %}"> FEEDBACK </a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+
+{%endblock%}

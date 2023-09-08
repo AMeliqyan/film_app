@@ -1,0 +1,35 @@
+{% extends "film/layout/user.html" %}
+{% block title%} USERS Notification {%endblock%}
+{% block content%}
+<table class="table table-bordered">
+    <thead>
+    <tr>
+        <th> User</th>
+        <th> Film</th>
+        <th>message</th>
+        <th> Action</th>
+
+
+    </tr>
+    </thead>
+    <tbody>
+
+    {% for not in user_not %}
+    <tr>
+        <td>{{not.user}}</td>
+        <td>{{not.film}}</td>
+        <td>{{not.message}}</td>
+        <td>
+            <a href="{% url 'del_film' id=not.film.id %}" class="btn btn-sm btn-danger"> Delete </a>
+            <a href="{% url 'update_film' id=not.film.id %}" class="btn btn-sm btn-warning"> Update </a>
+            <a href="{% url 'film_id' id=not.film.id %}" class="btn btn-sm btn-primary">See Details</a>
+            <a href="{% url 'seen' id=not.id %}" class="btn btn-sm btn-primary">Seen</a>
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+
+</table>
+
+
+{%endblock%}

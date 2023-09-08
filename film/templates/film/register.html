@@ -1,0 +1,20 @@
+{% extends "film/layout/user.html" %}
+
+{% block title%}Register{%endblock%}
+{% block content%}
+<h1>Register</h1>
+<form method="POST" novalidate>
+    {% csrf_token %}
+    {% for field in form %}
+    <div class="form-group">
+        <div class="text-danger">
+            {{ field.errors }}
+        </div>
+        {{ field.label_tag }}
+        {{ field }}
+
+    </div>
+    {% endfor %}
+    <button>Register</button>
+</form>
+{%endblock%}
